@@ -30,20 +30,20 @@
 */
 
 //Code Here
-class Employee {
-  constructor (first_name, last_name, email, age) {
-    this.first_name = first_name;
-    this.last_name = last_name;
-    this.email = email;
-    this.age = age;
-    this.makeWidget = function() {
-      return first_name + ' ' + last_name + ' Widget'
-    }
+
+class Employee{
+  constructor(first_name, last_name, email, age){
+      this.first_name = first_name;
+      this.last_name = last_name;
+      this.email = email;
+      this.age = age;
+      this.makeWidget = function(){
+          return first_name + ' ' + last_name + ' Widget';
   }
-} 
-let cody = new Employee('Cody', 'Young', 'codyjamesyoung@gmail.com', 26)
-console.log(cody);
-console.log(cody.makeWidget());
+  }
+}var user01 = new Employee('Aaron', 'Nacua','anacua@gmail.com',43);
+
+console.log(user01);
 
 
 ////////// PROBLEM 2 //////////
@@ -62,25 +62,23 @@ console.log(cody.makeWidget());
 */
 
 //Code Here
-
 class Manager extends Employee{
-  constructor(first_name, last_name, email, age){
-    super(first_name, last_name, email, age);
-    let that = this;
-    that.reports = [];
-
-    that.hire = function(employee) {
-      that.reports.push(employee);
-    }
-    that.fire = function(index) {
-      that.reports.splice(index, 1);
-    }
+  constructor(first_name, last_name, email, age) {
+    super(first_name, last_name, email, age)
+    this.reports = [];
+    
   }
-
+  hire(employee) {
+    this.reports.push(employee);
+  }
+  fire(index) {
+    this.reports.splice(index);
+  }
 }
 
 
-
+let bryce = new Manager("Bryce", "Hull", "gmail.com", 24)
+console.log(bryce)
 
 
 
@@ -107,53 +105,6 @@ class Manager extends Employee{
 
 //Code Here
 
-class ProgressiveManager extends Manager{
-  constructor(first_name, last_name, email, age){
-    super(first_name, last_name, email, age);
-    let that = this;
-    this.title = 'Not a manager';
-    this.bonus = 0;
-
-    let updateTitle = function(){
-      let count = that.reports.length
-      if (count === 0){
-        that.title = 'Not a manager';
-      } else if (count >= 1 && count <= 3){
-        that.title = 'Barely Manager'
-      } else if (count >= 4 && count <= 10){
-        that.title = 'Mostly Manager';
-      } else if (count >= 11 && count <= 50){
-        that.title = 'Manager';
-      } else if (count >= 51 && count <= 100){
-        that.title = 'Manager Plus';
-      } else {
-        that.title = 'Bestest Manager';
-      }
-      console.log(that.title);
-      
-    }
-
-    var origHire = this.hire;
-    this.hire = function(employee) {
-      origHire(employee);
-      updateTitle();
-  
-  
-    }
-    let origFire = this.fire;
-    this.fire = function(index){
-      origFire(index);
-      updateTitle();
-      this.bonus += 100;
-    }
-  }
-}
-
-let gary = new ProgressiveManager ('Gary', 'Smith', 'gary@gmail.com', 44);
-console.log(gary);
-gary.hire(cody);
-// gary.fire(0);
-console.log(gary);
 
 
 ////////// PROBLEM 4 - Black Diamond //////////
